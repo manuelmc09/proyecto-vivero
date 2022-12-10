@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+	rel="stylesheet" type="text/css" />
+<link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class="container m-3 p-5"></div>
+	<div class="container-fluid mt-2">
+		<!-- Alerta antes de la barra de navegación -->
+		<div
+			class="alert alert-dismissible fade show alert-warning fixed-bottom">
+			Aviso de Cookies: Utilizamos cookies propias y de terceros para
+			obtener datos estadísticos de la navegación de nuestros usuarios y
+			mejorar nuestros servicios. Si acepta o continúa navegando,
+			consideramos que acepta su uso. Puede cambiar la configuración u
+			obtener más información aquí <a href="#">Enlace a política de
+				recogida y tratamiento de cookies.</a>
+			<button type="button" class="close" data-dismiss="alert">x</button>
+		</div>
+		<!-- Barra de Navegación-->
+		<header class="row">
+			<nav
+				class="navbar navbar-expand-sm navbar-light bg-light fixed-top mt-2">
+
+				<a class="navbar-brand" th:href="@{/}"> <img
+					src="/images/tree.png" class="img-thumbnail" alt="logo empresa"
+					width="124" height="56">
+				</a>
+				<button class="navbar-toggler navbar-toggler-right" type="button"
+					data-toggle="collapse" data-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<span
+					class="navbar-text text-success mr-2 d-none d-sm-none d-md-block">Especialistas
+					en Manzanos de Sidra <br> Atención Personalizada
+				</span>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
+						<li class="nav-item"
+							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+							<a class="nav-link" aria-current="page" th:href="@{/miperfil}">Mi
+								perfil</a>
+						</li>
+						<!-- 						<li class="nav-item dropdown"><a -->
+						<!-- 							class="nav-link dropdown-toggle dropdown-toggle-split" href="#" -->
+						<!-- 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" -->
+						<!-- 							aria-expanded="false"> Productos </a> -->
+						<!-- 							<ul class="dropdown-menu" -->
+						<!-- 								aria-labelledby="navbarDropdownMenuLink"> -->
+						<!-- 								<li><a class="dropdown-item" -->
+						<!-- 									th:href="@{/productos?categoria=informatica}">De Temporada</a></li> -->
+						<!-- 								<li><a class="dropdown-item" -->
+						<!-- 									th:href="@{/productos?categoria=salud}">En Maceta</a></li> -->
+						<!-- 							</ul></li> -->
+						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
+							class="nav-link" th:href="@{/login}">Iniciar Sesi&oacuten</a></li>
+						<li class="nav-item"
+							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+							<a class="nav-link" th:href="@{/user/mispedidos}">Mis Pedidos</a>
+						</li>
+						<li class="nav-item"
+							sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')"><a
+							class="nav-link" th:href="@{/admin/indexadmin}">Panel
+								administraci&oacuten</a></li>
+						<li class="nav-item"
+							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+							<a class="nav-link" th:href="@{/user/miperfil}">Mi cuenta</a>
+						</li>
+						<li class="nav-item" sec:authorize="!hasRole('ROLE_ADMIN')">
+							<a class="nav-link" th:href="@{/user/carrito}"><i
+								class="fa fa-shopping-cart" aria-hidden="true"></i> </a>
+						</li>
+						<li class="nav-item" sec:authorize="isAuthenticated()"><a
+							class="nav-link" th:href="@{/salir}">Cerrar Sesi&oacuten</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/contactanos}">Contacto</a></li>
+						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
+							class="nav-link" th:href="@{/registrarse}">Registrarse</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	</div>
+	<header id="page-header" class="row">
+		<div class="col-12 pt-3 pb-3 m-2 text-success">
+			<div id="noAutentificado" sec:authorize="!isAuthenticated()">
+				<h6>NO est&aacutes auntentificado</h6>
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<h5 id="nombreUsuario" sec:authentication="name"></h5>
+				<h5>Est&aacutes auntentificado-a</h5>
+			</div>
+			<div id="cerrarSesion" sec:authorize="isAuthenticated()"></div>
+	</header>
+
+	<section class="container-fluid">
+		<div class="row mt-3 justify-content-around">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+				<h3 class="text-center text-md-start text-capitalize mt-2 mb-5">
+					Carrito <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
+				</h3>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<table
+					class="table table-bordered table-success table-striped text-center mt-5">
+					<thead>
+						<tr>
+							<!-- Lista como en el index -->
+							<th scope="col" colspan="3" class="h5 text-success  m-2">Nombre
+								Producto</th>
+							<th scope="col" class="h5 text-success m-2">Imagen</th>
+							<th scope="col" class="h5 text-success m-2">Precio</th>
+							<th scope="col" class="h5 text-success m-2"></th>
+							<th scope="col" class="h5 text-success m-2"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="x :${session.carrito}">
+							<td><img th:src="@{${x.imagen}}"></td>
+							<td th:text="@{${x.nombre}}"></td>
+							<td th:text="@{${#numbers.formatCurrency(x.precio)}}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<a th:href="@{/user/confirmarCompra}" class="btn btn-success m-4">Confirmar compra</a>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- PIE DE PÁGINA  -->
+	<footer
+		class="row bg-light  justify-content-center mt-3 p-3 text-success">
+		<div class="col-12 col-md-6 w-100">
+			<p class="text-center text-success">ViverosAveiga Todos los
+				derechos reservados</p>
+		</div>
+		<div class="col-12 col-md-12 text-center mb-3 mt-3 position-relative">
+			<h6>33008, Calle Mateo II, SPA</h6>
+			<img src="/images/tree.png" alt="logo empresa" title="logo"
+				width="100" height="100" />
+			<p class="text-center">
+				<i class="fa fa-phone" aria-hidden="true"></i> +923042275725
+			</p>
+			<p class="text-center">
+				<i class="fa fa-envelope-o" aria-hidden="true"></i>
+				viverosaveiga@gmail.com
+			</p>
+		</div>
+		<div class="col-12 col-md-12 mb-3 mt-3">
+			<nav class="nav m-2 justify-content-center text-dark rounded">
+				<a href="https://www.facebook.com" target="_blank" class="nav-link"><i
+					class="fa fa-facebook text-center text-success" aria-hidden="true"></i></a>
+				<a href="https://www.twitter.com" target="_blank" class="nav-link"><span
+					class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i
+						class="fa fa-twitter fa-stack-1x"></i></span></a> <a
+					href="https://www.instagram.com" target="_blank" class="nav-link"><i
+					class="fa fa-instagram" aria-hidden="true"></i></a> <a
+					href="https://www.linkedin.com" target="_blank" class="nav-link"><i
+					class="fa fa-linkedin" aria-hidden="true"></i></a>
+			</nav>
+		</div>
+	</footer>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+</body>
+</html>

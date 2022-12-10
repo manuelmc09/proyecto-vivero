@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conocenos</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container m-3 p-5"></div>
+        <div class="container-fluid mt-2">
+            <!-- Alerta antes de la barra de navegación -->
+            <div class="alert alert-dismissible fade show alert-warning fixed-bottom">
+                Aviso de Cookies: Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso. Puede cambiar la configuración u obtener más información aquí <a href="#">Enlace a política de recogida y tratamiento de cookies.</a>
+                <button type="button" class="close" data-dismiss="alert">x</button>
+            </div>
+            <!-- Barra de Navegación-->
+            <header class="row">
+                <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top mt-2">
+
+                    <a class="navbar-brand" th:href="@{/}">
+                        <img src="images/tree.png" class="img-thumbnail" alt="logo empresa" width="124" height="56">     
+                    </a>
+
+                    <button class="navbar-toggler navbar-toggler-right" type="button"
+                            data-toggle="collapse" data-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <span class="navbar-text text-success mr-2 d-none d-sm-none d-md-block">Especialistas en Manzanos de Sidra <br> Atención Personalizada</span> 
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
+                            <li class="nav-item"  sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+                                <a class="nav-link"
+                                   aria-current="page" th:href="@{/miperfil}">Mi perfil</a>
+                            </li>
+<!--                             <li class="nav-item dropdown"><a -->
+<!--                                     class="nav-link dropdown-toggle dropdown-toggle-split" href="#" -->
+<!--                                     id="navbarDropdownMenuLink" role="button" -->
+<!--                                     data-toggle="dropdown" aria-expanded="false"> Productos -->
+<!--                                 </a> -->
+<!--                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> -->
+<!--                                     <li><a class="dropdown-item" -->
+<!--                                            th:href="@{/productos?categoria=informatica}">De Temporada</a> -->
+<!--                                     </li> -->
+<!--                                     <li><a class="dropdown-item" -->
+<!--                                            th:href="@{/productos?categoria=salud}">En Maceta</a> -->
+<!--                                      </li> -->
+<!--                                 </ul> -->
+<!--                                 </li> -->
+                            <li class="nav-item" sec:authorize="!isAuthenticated()"><a
+                                    class="nav-link" th:href="@{/login}">Iniciar Sesi&oacuten</a></li>
+<!--                             <li class="nav-item" -->
+<!--                                 sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')"> -->
+<!--                                 <a class="nav-link" th:href="@{/user/mispedidos}">Mis Pedidos</a> -->
+<!--                             </li> -->
+                            <li class="nav-item"
+                                sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')"><a
+                                    class="nav-link" th:href="@{/admin/indexadmin}">Panel
+                                    administraci&oacuten</a></li>
+                            <li class="nav-item"
+                                sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+                                <a class="nav-link" th:href="@{/user/miperfil}">Mi cuenta</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+                                <a class="nav-link" th:href="@{/user/carrito}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a></li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()"><a
+                                    class="nav-link" th:href="@{/logout}">Cerrar Sesi&oacuten</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   th:href="@{/contactanos}">Contacto</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="!isAuthenticated()"><a
+                                    class="nav-link" th:href="@{/registrarse}">Registrarse</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+
+
+        <!-- CONTENIDO DE IMAGENES -->
+        <section class="container-fluid">
+            <div class="row mt-3 justify-content-around">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3 class="text-center text-md-start text-capitalize btn-success mt-2 mb-5">Sobre nosotros</h3>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <!--        <div class="embed-responsive embed-responsive-4by3">
+                              <iframe src="images/video.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="300" height="auto" controls autoplay></iframe>
+                            </div>-->
+                    <figure class="figure">
+                        <img src="images/shrubs-gb12aeb5f0_1280.jpg" alt="imagen vivero" title="vivero" class="img-fluid rounded">
+                        <figcaption class="figure-caption text-center">Nuestras instalaciones</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="row mt-3">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            <figure class="figure">
+                                <img src="images/verdialona.png" alt="imagen cabriolet" title="descapotable" class="img-fluid rounded">
+                                <figcaption class="figure-caption text-center">Nuestras Variedades</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            <figure class="figure">
+                                <img src="images/finca-gallinal-10-340x400.jpg" alt="imagen navegator" title="coche navegator" class="img-fluid rounded">
+                                <figcaption class="figure-caption text-center">Nuestra Finca</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 col-sm-6 col-md-6">
+                            <figure class="figure">
+                                <img src="images/OIP.jpg" alt="imagen carretera invierno" title="carretera invierno" class="img-fluid rounded">
+                                <figcaption class="figure-caption text-center">Comprometidos con lo nuestro</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6">
+                            <figure class="figure">
+                                <img src="images/finca-gallinal-14-340x400.jpg" alt="imagen shoes" title="shoes fuera del coche" class="img-fluid rounded">
+                                <figcaption class="figure-caption text-center">Sidra de Asturias D.O.P </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contenido principal-->
+        <main class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-4 col-sm-4 col-md-3">
+                    <ul class="list-group" id="navegacion">
+                        <li class="list-group-item" data-target="#s1">Nuestra Historia</li>
+                        <li class="list-group-item" data-target="#s2">Misión</li>
+                        <li class="list-group-item" data-target="#s3">Valores</li>
+                        <li class="list-group-item" data-target="#s4">Visión</li>
+                    </ul>
+                </div>
+                <div class="col-8 col-sm-8 col-md-6 ejemploscroll mt-3" data-spy="scroll" data-target="#navegacion" data-offset="0">
+                    <h1 id="s1">Nuestra historia</h1>
+                    <p>Nuestra apuesta por la CALIDAD se dirige tanto a la manzana como al servicio al cliente. Para obtener la máxima calidad se requiere un mantenimiento constante para sacar lo mejor del árbol y a la vez vigilar las amenazas que a lo largo del año rondan nuestros manzanos. La seguridad laboral, la mecanización y la eficiencia son parámetros de gestión y control fundamentales para nosotros.
+                    </p>
+                    <h1 id="s2">Misión</h1>
+                    <p>El 83% de la finca cuenta con un sistema de riego por goteo desde el que, de forma automatizada y controlada en remoto, podemos llevar a cabo todo el programa de fertirrigación cuando así sea necesario y de forma sectorizada en función de las necesidades de cada zona.</p>
+                    <h1 id="s3">Valores</h1>
+                    <p>Nuestra ubicación nos permite que produzcamos plantas con una alta función radicular debido a las condiciones climatológicas y las caracteristicas de nuestros terrenos </p>
+                    <h1 id="s4">Visión</h1>
+                    <p>Ofrecemos un servicio muy personalizado. De esta forma, usted tendrá la garantía de que respondemos de forma eficaz a sus necesidades. <br/>Con nosotros, encontrará cualquier árbol frutal que pueda cultivarse en Asturias.</p>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- PIE DE PÁGINA  -->
+        <footer class="row bg-light  justify-content-center mt-3 p-3 text-success">
+            <div class="col-12 col-md-6 w-100">
+                <p class="text-center text-success">ViverosAveiga Todos los derechos reservados</p>
+            </div>
+            <div class="col-12 col-md-12 text-center mb-3 mt-3 position-relative">
+                <h6>33008, Calle Mateo II, SPA</h6>
+                <img src="/images/tree.png" alt="logo empresa" title="logo" width="100" height="100"/>
+                <p class="text-center"><i class="fa fa-phone" aria-hidden="true"></i>
+                    +923042275725
+                </p>
+                <p class="text-center"><i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    viverosaveiga@gmail.com
+                </p>
+            </div>
+            <div class="col-12 col-md-12 mb-3 mt-3">
+                <nav class="nav m-2 justify-content-center text-dark rounded">
+                    <a href="https://www.facebook.com" target="_blank" class="nav-link"><i class="fa fa-facebook text-center text-success" aria-hidden="true"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" class="nav-link"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                    <a href="https://www.instagram.com" target="_blank" class="nav-link"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="nav-link"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                </nav>
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            //Funcion para la Fotografía 1
+            if ($("figure img[title$='ble']" == true)) {
+                $("figure img[title$='ble']").on('mouseenter', function () {
+                    /**$("figure img[title$='ble']").animate(
+                     {
+                     opacity:0,
+                     width:"hide"},
+                     5000);*/
+                    $("figure img[title$='ble']").attr({
+                        src: "images/apple-gce729e822_1280.jpg",
+                        title: "vacaciones con mis perros",
+                        alt: "imagen descapotable perros"
+                    })
+                });
+            }
+            if ($("figure img[title$='os']" == true)) {
+                $("figure img[title$='ble']").on('mouseleave', function () {
+                    $("figure img[title$='os']").attr({
+                        src: "images/raxao.png",
+                        title: "descapotable",
+                        alt: "imagen cabriolet"
+                    })
+                });
+            }
+            //Funcion para la Fotografía 4
+            if ($("figure img[title$='che']" == true)) {
+                $("figure img[title$='che']").on('mouseenter', function () {
+                    /**$("figure img[title$='ble']").animate(
+                     {
+                     opacity:0,
+                     width:"hide"},
+                     5000);*/
+                    $("figure img[title$='che']").attr({
+                        src: "images/regona.png",
+                        title: "gato en el auto",
+                        alt: "imagen gato auto"
+                    })
+                });
+            }
+            if ($("figure img[title$='to']" == true)) {
+                $("figure img[title$='che']").on('mouseleave', function () {
+                    $("figure img[title$='to']").attr({
+                        src: "images/xuanina.png",
+                        title: "shoes fuera del coche",
+                        alt: "imagen pies"
+                    })
+                });
+            }
+
+
+        });
+
+
+    </script>
+
+</body>
+</html>
