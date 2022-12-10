@@ -23,8 +23,8 @@ import lombok.*;
 @Table(name = "PEDIDOS")
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode
 @Data
 public class Pedidos implements Serializable {

@@ -20,10 +20,10 @@ import lombok.*;
  */
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @EqualsAndHashCode
 public class PedidosDTO implements Serializable {
 

@@ -12,8 +12,8 @@ import lombok.*;
  *
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "ROLES")
 public class Rol {
