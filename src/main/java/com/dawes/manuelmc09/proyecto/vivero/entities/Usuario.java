@@ -22,8 +22,8 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode
 public class Usuario implements Serializable {
 
