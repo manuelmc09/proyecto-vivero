@@ -110,14 +110,14 @@ public class Productos implements Serializable {
 		super();
 	}
 
-	public Productos(String caracteristicas, String categoria, String imagen, String nombre, float precio, int stock) {
-		super();
-		this.nombre = nombre;
-		this.caracteristicas = caracteristicas;
-		this.categoria = categoria;
-		this.imagen = imagen;
-		this.stock = stock;
-		this.precio = precio;
-	}
+//	public Productos(String caracteristicas, String categoria, String imagen, String nombre, float precio, int stock) {
+//		super();
+//		this.nombre = nombre;
+//		this.caracteristicas = caracteristicas;
+//		this.categoria = categoria;
+//		this.imagen = imagen;
+//		this.stock = stock;
+//		this.precio = precio;
+//	}
 
 }

@@ -103,14 +103,14 @@ public class Usuario implements Serializable {
 		this.username = username;
 	}
 
-	public Usuario(String nombre, String email, String username, String password, Rol rol) {
-		super();
-		this.nombre = nombre;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.rol = rol;
-	}
+//	public Usuario(String nombre, String email, String username, String password, Rol rol) {
+//		super();
+//		this.nombre = nombre;
+//		this.email = email;
+//		this.username = username;
+//		this.password = password;
+//		this.rol = rol;
+//	}
 
 	public Usuario() {
 	}
