@@ -60,10 +60,7 @@ public class DBInitializer {
         List<Rol>losRoles=new ArrayList<>();
         rolRepository.save(admin);
         rolRepository.save(user);
-        for (Rol r : losRoles) {
-        	rolRepository.save(r);
-            logger.info("Rol insertado correctamente");
-        }
+        
 //        
 //        //	Usuarios
 //        logger.info("Create Usuarios objects....");
