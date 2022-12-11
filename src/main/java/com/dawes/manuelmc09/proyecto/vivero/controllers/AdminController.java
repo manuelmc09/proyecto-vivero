@@ -41,10 +41,10 @@ public class AdminController {
 		return "admin/productos/verusuarios";
 	}
 
-	@RequestMapping("/insertar")
+	@RequestMapping("/insertarproducto")
 	public String insertar(Model model) {
 		model.addAttribute("producto", new Productos());
-		return ("/admin/productos/forminsertarproducto");
+		return ("/admin/forminsertarproducto");
 	}
 
 	@RequestMapping(value = "/persistir", method = RequestMethod.POST)
@@ -80,6 +80,6 @@ public class AdminController {
 	public String modificarusuario(@RequestParam int idusuario,Model model) {
 		model.addAttribute("usuario", usuarioService.findById(idusuario));
 		
-		return "admin/productos/modificarusuario";
+		return "admin/modificarusuario";
 	}
 }
