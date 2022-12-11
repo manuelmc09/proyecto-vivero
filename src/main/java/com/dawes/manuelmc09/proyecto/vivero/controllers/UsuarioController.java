@@ -105,7 +105,7 @@ public class UsuarioController {
 //		String nombre=
 //		usuario.setNombre(nombre);
 		usuario.setPassword(usuario.getPassword());
-		usuario.setRol(rolService.getById(2));
+		usuario.setRol(rolService.getById(11));
 		usuario.setUsername(usuario.getUsername());
 		usuarioService.save(usuario);
 		return "redirect:/user/miperfil";

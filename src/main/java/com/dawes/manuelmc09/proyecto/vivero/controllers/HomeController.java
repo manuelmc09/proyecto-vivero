@@ -75,7 +75,7 @@ public class HomeController {
 		String logname = usuario.getNombre();
 		String password = usuario.getPassword();
 //		usuario.setRol(rolService.findById(2).get());
-		usuario.setRol(rolService.getById(2));
+		usuario.setRol(rolService.getById(11));
 		usuario.setUsername(username);
 		usuario.setEmail(logemail);
 		usuario.setNombre(logname);
