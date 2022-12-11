@@ -41,7 +41,7 @@ public class AdminController {
 		return "admin/productos/verusuarios";
 	}
 
-	@RequestMapping("/insertarproducto")
+	@RequestMapping("insertarproducto")
 	public String insertar(Model model) {
 		model.addAttribute("producto", new Productos());
 		return ("/admin/forminsertarproducto");
