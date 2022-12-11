@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 
 /**
  * 
@@ -16,6 +17,8 @@ import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
 @Repository
 public interface PedidosRepository extends JpaRepository<Pedidos, Integer> {
 
-	@Query(value="SELECT p FROM Pedidos p WHERE p.usuario.id=?1")
+	@Query(value = "SELECT p FROM Pedidos p WHERE p.propietario.id=?1")
 	List<Pedidos> findIdUser(Integer id);
+
+	List<Pedidos> findByPropietario(Usuario propietario);
 }

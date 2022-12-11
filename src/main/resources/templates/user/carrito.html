@@ -44,16 +44,17 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<span
-					class="navbar-text text-success mr-2 d-none d-sm-none d-md-block">Especialistas
+					class="navbar-text text-success mr-2 d-none d-sm-none d-md-block">
+					<span class="navbar-text font-weight-bold text-uppercase d-md-block">viveros aveiga</span>Especialistas
 					en Manzanos de Sidra <br> Atención Personalizada
 				</span>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
-						<li class="nav-item"
-							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
-							<a class="nav-link" aria-current="page" th:href="@{/miperfil}">Mi
-								perfil</a>
-						</li>
+						<!-- 						<li class="nav-item" -->
+						<!-- 							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')"> -->
+						<!-- 							<a class="nav-link" aria-current="page" th:href="@{/miperfil}">Mi -->
+						<!-- 								perfil</a> -->
+						<!-- 						</li> -->
 						<!-- 						<li class="nav-item dropdown"><a -->
 						<!-- 							class="nav-link dropdown-toggle dropdown-toggle-split" href="#" -->
 						<!-- 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" -->
@@ -67,10 +68,10 @@
 						<!-- 							</ul></li> -->
 						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
 							class="nav-link" th:href="@{/login}">Iniciar Sesi&oacuten</a></li>
-						<li class="nav-item"
-							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
-							<a class="nav-link" th:href="@{/user/mispedidos}">Mis Pedidos</a>
-						</li>
+						<!-- 						<li class="nav-item" -->
+						<!-- 							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')"> -->
+						<!-- 							<a class="nav-link" th:href="@{/user/mispedidos}">Mis Pedidos</a> -->
+						<!-- 						</li> -->
 						<li class="nav-item"
 							sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')"><a
 							class="nav-link" th:href="@{/admin/indexadmin}">Panel
@@ -83,8 +84,10 @@
 							<a class="nav-link" th:href="@{/user/carrito}"><i
 								class="fa fa-shopping-cart" aria-hidden="true"></i> </a>
 						</li>
-						<li class="nav-item" sec:authorize="isAuthenticated()"><a
-							class="nav-link" th:href="@{/salir}">Cerrar Sesi&oacuten</a></li>
+							<li class="nav-item" sec:authorize="isAuthenticated()">
+							<!--  --> <a class="nav-link" th:href="@{/logout}">Cerrar
+								Sesi&oacuten</a>
+						</li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/contactanos}">Contacto</a></li>
 						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
@@ -109,7 +112,7 @@
 	<section class="container-fluid">
 		<div class="row mt-3 justify-content-around">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				<h3 class="text-center text-md-start text-capitalize mt-2 mb-5">
+				<h3 class="text-center text-success text-md-start text-capitalize mt-2 mb-5">
 					Carrito <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
 				</h3>
 			</div>
@@ -118,31 +121,42 @@
 
 	<section>
 		<div class="container">
-			<div class="row">
-				<table
-					class="table table-bordered table-success table-striped text-center mt-5">
-					<thead>
-						<tr>
-							<!-- Lista como en el index -->
-							<th scope="col" colspan="3" class="h5 text-success  m-2">Nombre
-								Producto</th>
-							<th scope="col" class="h5 text-success m-2">Imagen</th>
-							<th scope="col" class="h5 text-success m-2">Precio</th>
-							<th scope="col" class="h5 text-success m-2"></th>
-							<th scope="col" class="h5 text-success m-2"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="x :${session.carrito}">
-							<td><img th:src="@{${x.imagen}}"></td>
-							<td th:text="@{${x.nombre}}"></td>
-							<td th:text="@{${#numbers.formatCurrency(x.precio)}}"></td>
-						</tr>
-					</tbody>
-				</table>
-				<a th:href="@{/user/confirmarCompra}" class="btn btn-success m-4">Confirmar compra</a>
+			
+			<div class="row  text-success justify-content-around" th:if="${carrito == null}">
+				<div class="col-md-offset-1 col-md-10">
+					<div class="jumbotron">
+						<div class="container">
+							<h5 class="text-center">Aún no ha seleccionado ningún
+								producto para comprar</h5>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<table
+						class="table table-bordered table-success table-striped text-center mt-5">
+						<thead>
+							<tr>
+								<!-- Lista como en el index -->
+								<th scope="col" colspan="3" class="h5 text-success  m-2">Nombre
+									Producto</th>
+								<th scope="col" class="h5 text-success m-2">Imagen</th>
+								<th scope="col" class="h5 text-success m-2">Precio</th>
+								<th scope="col" class="h5 text-success m-2"></th>
+								<th scope="col" class="h5 text-success m-2"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="x :${session.carrito}">
+								<td><img th:src="@{${x.imagen}}"></td>
+								<td th:text="@{${x.nombre}}"></td>
+								<td th:text="@{${#numbers.formatCurrency(x.precio)}}"></td>
+							</tr>
+						</tbody>
+					</table>
+					<a th:href="@{/user/confirmarCompra}" class="btn btn-success m-4">Confirmar
+						compra</a>
+				</div>
 			</div>
-		</div>
 	</section>
 
 

@@ -54,7 +54,8 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/persistirusuario", method = RequestMethod.POST)
 	public String persistirusuario(@ModelAttribute Usuario usuario) {
-		usuario.setRol(rolService.findById(2).get());
+//		usuario.setRol(rolService.findById(2).get());
+		usuario.setRol(rolService.getById(2));
 		usuarioService.save(usuario);
 		return "redirect:/admin/verusuarios";
 	}

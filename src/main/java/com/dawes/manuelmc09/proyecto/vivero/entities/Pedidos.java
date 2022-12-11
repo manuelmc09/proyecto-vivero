@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.*;
 
-
 /**
  * 
  * @author manuelmc09
@@ -42,18 +41,25 @@ public class Pedidos implements Serializable {
 	private LocalDate fechaPedido;
 	@Column(name = "PRECIO", precision = 4, scale = 2, columnDefinition = "float default 0.00")
 	private float precio;
-
-	@ManyToMany
-	@JoinTable(name = "PEDIDOS_PRODUCTOS", joinColumns = { @JoinColumn(name = "IDPRODUCTO") }, inverseJoinColumns = {
-			@JoinColumn(name = "IDPEDIDO") })
-	private List<Productos> productos = new ArrayList<>();
+//
+//	@ManyToMany
+//	@JoinTable(name = "PEDIDOS_PRODUCTOS", joinColumns = { @JoinColumn(name = "IDPRODUCTO") }, inverseJoinColumns = {
+//			@JoinColumn(name = "IDPEDIDO") })
+//	private List<Productos> productos = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "IDUSUARIO")
-	private Usuario usuario;
+	private Usuario propietario;
+	
+	
+	
 
 	public Pedidos() {
 		super();
+	}
+
+	public Pedidos(Usuario usuario) {
+		this.propietario = propietario;
 	}
 
 	public int getIdpedido() {
@@ -80,22 +86,22 @@ public class Pedidos implements Serializable {
 		this.precio = precio;
 	}
 
-	public List<Productos> getProductos() {
-		return productos;
+//	public List<Productos> getProductos() {
+//		return productos;
+//	}
+//
+//	public void setProductos(List<Productos> productos) {
+//		this.productos = productos;
+//	}
+
+	public Usuario getPropietario() {
+		return propietario;
 	}
 
-	public void setProductos(List<Productos> productos) {
-		this.productos = productos;
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+	
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	
-	
 }

@@ -1,18 +1,18 @@
 package com.dawes.manuelmc09.proyecto.vivero.servicesImpl;
 
-import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 import com.dawes.manuelmc09.proyecto.vivero.repositories.PedidosRepository;
 import com.dawes.manuelmc09.proyecto.vivero.repositories.UsuarioRepository;
 import com.dawes.manuelmc09.proyecto.vivero.services.PedidosService;
+import com.dawes.manuelmc09.proyecto.vivero.services.ProductosService;
 
 /**
  * 
@@ -27,6 +27,9 @@ public class PedidosServiceImpl implements PedidosService {
 
 	@Autowired
 	private PedidosRepository pedidosRepository;
+
+	@Autowired
+	private ProductosService productosService;
 
 	@Override
 	public List<Pedidos> findAll() {
@@ -82,6 +85,23 @@ public class PedidosServiceImpl implements PedidosService {
 	@Override
 	public Pedidos getById(Integer id) {
 		return pedidosRepository.getById(id);
+	}
+
+	@Override
+	public Pedidos insertar(Pedidos pedido, Usuario usuario) {
+		pedido.setPropietario(usuario);
+		return pedidosRepository.save(pedido);
+	}
+
+	@Override
+	public Pedidos insertar(Pedidos pedido) {
+		return pedidosRepository.save(pedido);
+	}
+
+	@Override
+	public Productos addProductoPedido(Productos producto, Pedidos pedido) {
+		producto.setPedido(pedido);
+		return productosService.save(producto);
 	}
 
 }

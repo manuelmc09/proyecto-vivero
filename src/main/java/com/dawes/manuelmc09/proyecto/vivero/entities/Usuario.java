@@ -45,8 +45,8 @@ public class Usuario implements Serializable {
 	private String password;
 	@ManyToOne
 	private Rol rol;
-	@OneToMany(mappedBy = "usuario")
-	private List<Pedidos> pedidos = new ArrayList<>();
+//	@OneToMany(mappedBy = "usuario")
+//	private List<Pedidos> pedidos = new ArrayList<>();
 
 	public String getUsername() {
 		return username;
@@ -79,9 +79,9 @@ public class Usuario implements Serializable {
 	
 	
 
-	public List<Pedidos> getPedidos() {
-		return pedidos;
-	}
+//	public List<Pedidos> getPedidos() {
+//		return pedidos;
+//	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -103,14 +103,14 @@ public class Usuario implements Serializable {
 		this.username = username;
 	}
 
-//	public Usuario(String nombre, String email, String username, String password, Rol rol) {
-//		super();
-//		this.nombre = nombre;
-//		this.email = email;
-//		this.username = username;
-//		this.password = password;
-//		this.rol = rol;
-//	}
+	public Usuario(String nombre, String email, String username, String password, Rol rol) {
+		super();
+		this.nombre = nombre;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.rol = rol;
+	}
 
 	public Usuario() {
 	}

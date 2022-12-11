@@ -14,7 +14,9 @@ public interface RolService {
 
 	List<Rol> findAll();
 
-	Optional<Rol> findById(Integer id);
+//	Optional<Rol> findById(Integer id);
+	Rol findById(Integer id);
+
 
 	boolean existsById(Integer id);
 

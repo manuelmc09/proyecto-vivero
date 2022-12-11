@@ -19,7 +19,7 @@ public class PedidosMapperImpl implements PedidosMapper {
 			pedidosdto.setIdpedido(pedido.getIdpedido());
 			pedidosdto.setFechaPedido(pedido.getFechaPedido());
 			pedidosdto.setPrecio(pedido.getPrecio());
-			pedidosdto.setUsuario(pedido.getUsuario());
+			pedidosdto.setUsuario(pedido.getPropietario());
 
 			return pedidosdto;
 		}

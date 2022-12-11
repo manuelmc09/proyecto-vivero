@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 import com.dawes.manuelmc09.proyecto.vivero.repositories.ProductosRepository;
 import com.dawes.manuelmc09.proyecto.vivero.services.ProductosService;
 
@@ -60,6 +62,21 @@ public class ProductosServiceImpl implements ProductosService {
 	@Override
 	public <S extends Productos> S save(S entity) {
 		return productosRepository.save(entity);
+	}
+
+	@Override
+	public List<Productos> productosDeUnPropietario(Usuario usuario) {
+		return productosRepository.findByPropietario(usuario);
+	}
+
+	@Override
+	public List<Productos> productosDeUnPedido(Pedidos pedido) {
+		return productosRepository.findByPedido(pedido);
+	}
+
+	@Override
+	public List<Productos> variosPorId(List<Integer> ids) {
+		return productosRepository.findAllById(ids);
 	}
 
 }

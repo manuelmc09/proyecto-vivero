@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 
 /**
  * 
@@ -24,13 +26,19 @@ public interface PedidosService {
 	boolean existsById(Integer id);
 
 	void deleteById(Integer id);
-	
+
 	void delete(Pedidos entity);
-	
+
 	Pedidos getOne(Integer id);
-	
+
 	void deleteAll();
 
 	Pedidos getById(Integer id);
+
+	Pedidos insertar(Pedidos pedido, Usuario usuario);
+
+	Pedidos insertar(Pedidos pedido);
+	
+	Productos addProductoPedido(Productos producto, Pedidos pedido);
 
 }

@@ -44,11 +44,17 @@ public class Productos implements Serializable {
 	private int stock;
 	@Column(name = "PRECIO", precision = 4, scale = 2, columnDefinition = "float default 0.00")
 	private float precio;
+//
+//	@ManyToMany
+//	@JoinTable(name = "PEDIDOS_PRODUCTOS", joinColumns = { @JoinColumn(name = "IDPEDIDO") }, inverseJoinColumns = {
+//			@JoinColumn(name = "IDPRODUCTO") })
+//	private List<Pedidos> pedidos = new ArrayList<>();
 
-	@ManyToMany
-	@JoinTable(name = "PEDIDOS_PRODUCTOS", joinColumns = { @JoinColumn(name = "IDPEDIDO") }, inverseJoinColumns = {
-			@JoinColumn(name = "IDPRODUCTO") })
-	private List<Pedidos> pedidos = new ArrayList<>();
+	@ManyToOne
+	private Usuario propietario;
+
+	@ManyToOne
+	private Pedidos pedido;
 
 	public int getIdproducto() {
 		return idproducto;
@@ -106,8 +112,40 @@ public class Productos implements Serializable {
 		this.precio = precio;
 	}
 
+//	public List<Pedidos> getPedidos() {
+//		return pedidos;
+//	}
+//
+//	public void setPedidos(List<Pedidos> pedidos) {
+//		this.pedidos = pedidos;
+//	}
+
 	public Productos() {
 		super();
+	}
+
+	public Usuario getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
+	}
+
+	public Pedidos getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedidos pedido) {
+		this.pedido = pedido;
+	}
+
+	public Productos(String nombre, String imagen, float precio, Usuario propietario) {
+		super();
+		this.nombre = nombre;
+		this.imagen = imagen;
+		this.precio = precio;
+		this.propietario = propietario;
 	}
 
 //	public Productos(String caracteristicas, String categoria, String imagen, String nombre, float precio, int stock) {

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
+import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 
 /**
  * 
@@ -30,4 +31,12 @@ public interface ProductosService {
 	Productos getById(Integer id);
 
 	<S extends Productos> S save(S entity);
+
+	List<Productos> productosDeUnPropietario(Usuario usuario);
+
+	List<Productos> productosDeUnPedido(Pedidos pedido);
+	
+	List<Productos> variosPorId(List<Integer> ids);
+	
+	
 }
