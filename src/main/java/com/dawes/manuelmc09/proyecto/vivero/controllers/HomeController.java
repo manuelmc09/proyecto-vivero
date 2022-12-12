@@ -67,6 +67,7 @@ public class HomeController {
 		model.addAttribute("usuario", new Usuario());
 		return "registro";
 	}
+	
 
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute Usuario usuario,  Model model) {
@@ -74,8 +75,9 @@ public class HomeController {
 		String logemail = usuario.getEmail();
 		String logname = usuario.getNombre();
 		String password = usuario.getPassword();
-//		usuario.setRol(rolService.findById(2).get());
-		usuario.setRol(rolService.getById(11));
+		usuario.setRol(rolService.getById(2));
+		//para Heroku
+//		usuario.setRol(rolService.getById(11));
 		usuario.setUsername(username);
 		usuario.setEmail(logemail);
 		usuario.setNombre(logname);

@@ -26,41 +26,47 @@ import com.dawes.manuelmc09.proyecto.vivero.repositories.UsuarioRepository;
 public class DBInitializer {
 
 	private static final Logger logger = LoggerFactory.getLogger(DBInitializer.class);
-    @Autowired
-    private ProductosRepository productosRepository;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private RolRepository rolRepository;
+	@Autowired
+	private ProductosRepository productosRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private RolRepository rolRepository;
 
-    @PostConstruct
-    public void initDb() {
-        logger.info("Starting database initialization...");
-//        //  Productos
-//        logger.info("Create Productos objects ....");
-//        Productos raxao = new Productos("Fruto de tamaño mediano, de forma redonda a troncocónica bastante aplanada, epidermis rayada de color rojo,con tonalidades naranja-marrón sobre fondo verde o amarillo verdoso.Variedad ácida", "EN MACETA", "raxao.png", "Raxao", 8.95f, 60);
-//        Productos regona = new Productos("Fruto de tamaño mediano o pequeño en situaciones de sobrecarga de producción, de forma redondeada aplanada, color verde o amarillo-verdoso. Variedad ácido-amarga.", "DE TEMPORADA", "regona.png", "Regona", 8.95f, 100);
-//        Productos delariega = new Productos("Fruto de tamaño mediano o algo pequeño de forma cónica oblonga a cónica globulosa y epidermis amarilla manchada de marrón anaranjado y estrías rosadas . Variedad semiácida.", "DE TEMPORADA", "delariega.png", "De la Riega", 8.95f, 120);
+	@PostConstruct
+	public void initDb() {
+		logger.info("Starting database initialization...");
+		// Productos
+		logger.info("Create Productos objects ....");
+		Productos raxao = new Productos(
+				"Fruto de tamaño mediano, de forma redonda a troncocónica bastante aplanada, epidermis rayada de color rojo,con tonalidades naranja-marrón sobre fondo verde o amarillo verdoso.Variedad ácida",
+				"EN MACETA", "raxao.png", "Raxao", 8.95f, 60);
+		Productos regona = new Productos(
+				"Fruto de tamaño mediano o pequeño en situaciones de sobrecarga de producción, de forma redondeada aplanada, color verde o amarillo-verdoso. Variedad ácido-amarga.",
+				"DE TEMPORADA", "regona.png", "Regona", 8.95f, 100);
+		Productos delariega = new Productos(
+				"Fruto de tamaño mediano o algo pequeño de forma cónica oblonga a cónica globulosa y epidermis amarilla manchada de marrón anaranjado y estrías rosadas . Variedad semiácida.",
+				"DE TEMPORADA", "delariega.png", "De la Riega", 8.95f, 120);
 //        Productos durona = new Productos("Fruto de tamaño mediano de forma globulosa a algo troncocónica, color amarillo verdoso con manchas naranja o marrón en una superficie habitualmente inferior a su cuarta parte. Variedad ácida.","DE TEMPORADA", "duronadetresali.png", "Durona de Tresali", 8.95f, 120);
 //
-//        List<Productos> losProductos = new ArrayList<>();
-//        productosRepository.save(raxao);
-//        productosRepository.save(regona);
-//        productosRepository.save(delariega);
+		List<Productos> losProductos = new ArrayList<>();
+		productosRepository.save(raxao);
+		productosRepository.save(regona);
+		productosRepository.save(delariega);
 //        productosRepository.save(durona);
-//        for (Productos p : losProductos) {
-//            productosRepository.save(p);
-//            logger.info("Producto insertado correctamente");
-//        }
+		for (Productos p : losProductos) {
+			productosRepository.save(p);
+			logger.info("Producto insertado correctamente");
+		}
 //        
-        //	Roles
-        logger.info("Create Roles objects ...");
-        Rol admin=new Rol("ROLE_ADMIN");
-        Rol user=new Rol("ROLE_USER");
-        List<Rol>losRoles=new ArrayList<>();
-        rolRepository.save(admin);
-        rolRepository.save(user);
-        
+		// Roles
+		logger.info("Create Roles objects ...");
+		Rol admin = new Rol("ROLE_ADMIN");
+		Rol user = new Rol("ROLE_USER");
+		List<Rol> losRoles = new ArrayList<>();
+		rolRepository.save(admin);
+		rolRepository.save(user);
+
 //        
 //        //	Usuarios
 //        logger.info("Create Usuarios objects....");
@@ -76,5 +82,5 @@ public class DBInitializer {
 //
 //        
 //        
-    }
+	}
 }

@@ -33,16 +33,16 @@ public class AdminController {
 	@RequestMapping("/verproductos")
 	public String verProductos(Model model) {
 		model.addAttribute("productos", productosService.findAll());
-		return "admin/productos/verproductos";
+		return "admin/verproductos";
 	}
 	@RequestMapping("/verusuarios")
 	public String verUsuarios(Model model) {
 		model.addAttribute("usuarios", usuarioService.findAll());
-		return "admin/productos/verusuarios";
+		return "admin/verusuarios";
 	}
 
 	@RequestMapping("insertarproducto")
-	public String insertar(Model model) {
+	public String insertarProducto(Model model) {
 		model.addAttribute("producto", new Productos());
 		return ("/admin/forminsertarproducto");
 	}
@@ -54,8 +54,9 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/persistirusuario", method = RequestMethod.POST)
 	public String persistirusuario(@ModelAttribute Usuario usuario) {
-//		usuario.setRol(rolService.findById(2).get());
-		usuario.setRol(rolService.getById(11));
+		usuario.setRol(rolService.getById(2));
+			//para Heroku
+//		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
 		return "redirect:/admin/verusuarios";
 	}
@@ -74,12 +75,18 @@ public class AdminController {
 	public String modificar(@RequestParam int idproducto,Model model) {
 		model.addAttribute("producto", productosService.findById(idproducto));
 		
-		return "admin/productos/modificarproducto";
+		return "admin/modificarproducto";
 	}
+//	@RequestMapping("modificarusuario")
+//	public String modificarusuario(@RequestParam int idusuario,Model model) {
+////		Usuario u=usuarioService.getById(idusuario);
+//	model.addAttribute("usuario", usuarioService.findById(idusuario));
+////		model.addAttribute("usuario",u);
+//		return "admin/modificarusuario";
+//	}
 	@RequestMapping("modificarusuario")
-	public String modificarusuario(@RequestParam int idusuario,Model model) {
-		model.addAttribute("usuario", usuarioService.findById(idusuario));
-		
+	public String modificarUsuario(@RequestParam int idusuario,Model model) {
+		model.addAttribute("usuario",usuarioService.findById(idusuario));
 		return "admin/modificarusuario";
 	}
 }

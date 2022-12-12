@@ -121,7 +121,6 @@ public class Productos implements Serializable {
 //	}
 
 	public Productos() {
-		super();
 	}
 
 	public Usuario getPropietario() {
@@ -148,14 +147,29 @@ public class Productos implements Serializable {
 		this.propietario = propietario;
 	}
 
-//	public Productos(String caracteristicas, String categoria, String imagen, String nombre, float precio, int stock) {
-//		super();
-//		this.nombre = nombre;
-//		this.caracteristicas = caracteristicas;
-//		this.categoria = categoria;
-//		this.imagen = imagen;
-//		this.stock = stock;
-//		this.precio = precio;
-//	}
+	public Productos(String caracteristicas, String categoria, String imagen, String nombre, float precio, int stock) {
+		super();
+		this.caracteristicas = caracteristicas;
+		this.categoria = categoria;
+		this.imagen = imagen;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.stock = stock;
+	}
+
+	public Productos(int idproducto, String nombre, String caracteristicas, String categoria, String imagen, int stock,
+			float precio, Usuario propietario, Pedidos pedido) {
+		super();
+		this.idproducto = idproducto;
+		this.nombre = nombre;
+		this.caracteristicas = caracteristicas;
+		this.categoria = categoria;
+		this.imagen = imagen;
+		this.stock = stock;
+		this.precio = precio;
+		this.propietario = propietario;
+		this.pedido = pedido;
+	}
+	
 
 }
