@@ -76,17 +76,19 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/miperfil")
-	public String miPerfil(Model model,Authentication authentication) {
-		Usuario usuario=usuarioService.findByUsername(authentication.getName());
-		model.addAttribute("usuario",usuario);
+	public String miPerfil(Model model, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		model.addAttribute("usuario", usuario);
 		return "user/miperfil";
 	}
+
 	@RequestMapping("/editarperfil")
-	public String editarPerfil(Model model,Authentication authentication) {
-		Usuario usuario=usuarioService.findByUsername(authentication.getName());
-		model.addAttribute("usuario",usuario);
+	public String editarPerfil(Model model, Authentication authentication) {
+		Usuario usuario = usuarioService.findByUsername(authentication.getName());
+		model.addAttribute("usuario", usuario);
 		return "user/editarperfil";
 	}
+
 //	@RequestMapping("modificarusuario")
 //	public String modificarusuario(@RequestParam int idusuario,Model model) {
 //		model.addAttribute("usuario", usuarioService.findById(idusuario));
@@ -100,22 +102,22 @@ public class UsuarioController {
 //		usuarioService.save(usuario);
 //		return "redirect:/admin/verusuarios";
 //	}
-	@RequestMapping(value="/guardarperfil",method=RequestMethod.POST)
-		public String guardarPerfil(@ModelAttribute Usuario usuario,Authentication authentication) {
-		Usuario user=usuarioService.findByUsername(authentication.getName());
+	@RequestMapping(value = "/guardarperfil", method = RequestMethod.POST)
+	public String guardarPerfil(@ModelAttribute Usuario usuario, Authentication authentication) {
+		Usuario user = usuarioService.findByUsername(authentication.getName());
 		user.setNombre(usuario.getNombre());
 		user.setEmail(usuario.getEmail());
 		user.setUsername(usuario.getUsername());
 		user.setPassword(securityService.toEncrypt(usuario.getPassword()));
-		
+
 //		usuario.setRol(rolService.getById(2));
 
-		user.setRol(rolService.getById(11));
-		
+//		user.setRol(rolService.getById(11));
+		usuario.setRol(rolService.getById(11));
 		// para Heroku
 //		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
 		return "redirect:/user/miperfil";
-		
+
 	}
 }
