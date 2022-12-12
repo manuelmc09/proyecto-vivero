@@ -101,15 +101,19 @@ public class UsuarioController {
 //		return "redirect:/admin/verusuarios";
 //	}
 	@RequestMapping(value="/guardarperfil",method=RequestMethod.POST)
-		public String guardarPerfil(@ModelAttribute Usuario usuario) {
-//		String nombre=
-//		usuario.setNombre(nombre);
-		usuario.setPassword(usuario.getPassword());
+		public String guardarPerfil(@ModelAttribute Usuario usuario,Authentication authentication) {
+		Usuario user=usuarioService.findByUsername(authentication.getName());
+		user.setNombre(usuario.getNombre());
+		user.setEmail(usuario.getEmail());
+		user.setUsername(usuario.getUsername());
+		user.setPassword(securityService.toEncrypt(usuario.getPassword()));
+		
 //		usuario.setRol(rolService.getById(2));
 
+		user.setRol(rolService.getById(11));
+		
 		// para Heroku
-		usuario.setRol(rolService.getById(11));
-		usuario.setUsername(usuario.getUsername());
+//		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
 		return "redirect:/user/miperfil";
 		
