@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,17 +63,18 @@ public class UsuarioController {
 		return "user/carrito";
 
 	}
-//	@RequestMapping("carrito")
-//	public List<Productos> carrito(Model model) {
-//		List<Integer> contenido = (List<Integer>) session.getAttribute("carrito");
-//
-//		return (contenido == null) ? null : productosService.variosPorId(contenido);
-//
-//	}
+
+	@RequestMapping("/carrito/add{id}")
+	public List<Productos> addCarrito(Model model, @PathVariable Integer id) {
+		List<Integer> contenido = (List<Integer>) session.getAttribute("carrito");
+
+		return (contenido == null) ? null : productosService.variosPorId(contenido);
+
+	}
 
 	@RequestMapping("/confirmarCompra")
 	public String confirmarCompra(Model model, Authentication Authentication, HttpSession sesion) {
-		return "/user/confirmacionCompra";
+		return "user/confirmacionCompra";
 	}
 
 	@RequestMapping("/miperfil")
@@ -108,7 +110,7 @@ public class UsuarioController {
 		user.setNombre(usuario.getNombre());
 		user.setEmail(usuario.getEmail());
 		user.setUsername(usuario.getUsername());
-		user.setPassword(securityService.toEncrypt(usuario.getPassword()));
+		user.setPassword(usuario.getPassword());
 
 //		usuario.setRol(rolService.getById(2));
 

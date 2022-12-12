@@ -52,7 +52,8 @@
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
 						<li class="nav-item"><a class="nav-link" aria-current="page"
-							th:href="@{/nosotros}">Sobre nosotros</a></li>
+							th:href="@{/nosotros}">Sobre nosotros</a>
+						</li>
 						<!-- 						<li class="nav-item dropdown"><a -->
 						<!-- 							class="nav-link dropdown-toggle dropdown-toggle-split" href="#" -->
 						<!-- 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" -->
@@ -85,9 +86,9 @@
 							<a class="nav-link" th:href="@{/user/miperfil}">Mi cuenta</a>
 						</li>
 						<li class="nav-item"
-							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
+							sec:authorize="!hasRole('ROLE_ADMIN')">
 							<!--  --> <a class="nav-link" th:href="@{/user/carrito}"> <i
-								class="fa fa-shopping-cart" aria-hidden="true"></i>
+								class="fa fa-shopping-cart rounded-circle" aria-hidden="true"></i>
 						</a>
 						</li>
 						<li class="nav-item" sec:authorize="isAuthenticated()">
@@ -194,9 +195,9 @@
 						<div class="card-body">
 							<h5 class="card-title text-center">DURONA DE TRESALI</h5>
 							<p class="card-text text-center  badge badge-info">8.95 €</p>
-							<a href="#" class="btn btn-secondary" data-toggle="modal"
+							<a  href="#" class="btn btn-secondary" data-toggle="modal"
 								data-target="#compra_id" data-placement="right">Añadir al
-								carrito</a>
+								carrito</a> <!-- th:href="@{carrito/add/{id}(id=${producto.id})}" -->
 							
 							<!-- Para añadir al carrito -->
 							<!-- 							<a  th:href="'/aniadirproductocarrito/' + ${producto.idproducto}" sec:authorize="isAuthenticated()" class="btn btn-secondary mt-4" data-toggle="modal" -->
@@ -314,18 +315,18 @@
 				</p>
 			</div>
 			<div class="col-12 col-md-12 mb-3 mt-3">
-				<nav class="nav m-2 justify-content-center text-dark rounded">
-					<a href="https://www.facebook.com" target="_blank" class="nav-link"><i
-						class="fa fa-facebook text-center text-success" aria-hidden="true"></i></a>
-					<a href="https://www.twitter.com" target="_blank" class="nav-link"><span
-						class="fa-stack fa-lg"><i
-							class="fa fa-square-o fa-stack-2x"></i><i
-							class="fa fa-twitter fa-stack-1x"></i></span></a> <a
-						href="https://www.instagram.com" target="_blank" class="nav-link"><i
-						class="fa fa-instagram" aria-hidden="true"></i></a> <a
-						href="https://www.linkedin.com" target="_blank" class="nav-link"><i
-						class="fa fa-linkedin" aria-hidden="true"></i></a>
-				</nav>
+<!-- 				<nav class="nav m-2 justify-content-center text-dark rounded"> -->
+<!-- 					<a href="https://www.facebook.com" target="_blank" class="nav-link"><i -->
+<!-- 						class="fa fa-facebook text-center text-success" aria-hidden="true"></i></a> -->
+<!-- 					<a href="https://www.twitter.com" target="_blank" class="nav-link"><span -->
+<!-- 						class="fa-stack fa-lg"><i -->
+<!-- 							class="fa fa-square-o fa-stack-2x"></i><i -->
+<!-- 							class="fa fa-twitter fa-stack-1x"></i></span></a> <a -->
+<!-- 						href="https://www.instagram.com" target="_blank" class="nav-link"><i -->
+<!-- 						class="fa fa-instagram" aria-hidden="true"></i></a> <a -->
+<!-- 						href="https://www.linkedin.com" target="_blank" class="nav-link"><i -->
+<!-- 						class="fa fa-linkedin" aria-hidden="true"></i></a> -->
+<!-- 				</nav> -->
 			</div>
 		</footer>
 	</div>

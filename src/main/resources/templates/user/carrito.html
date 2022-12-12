@@ -45,8 +45,10 @@
 				</button>
 				<span
 					class="navbar-text text-success mr-2 d-none d-sm-none d-md-block">
-					<span class="navbar-text font-weight-bold text-uppercase d-md-block">viveros aveiga</span>Especialistas
-					en Manzanos de Sidra <br> Atención Personalizada
+					<span
+					class="navbar-text font-weight-bold text-uppercase d-md-block">viveros
+						aveiga</span>Especialistas en Manzanos de Sidra <br> Atención
+					Personalizada
 				</span>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
@@ -78,18 +80,21 @@
 								administraci&oacuten</a></li>
 						<li class="nav-item"
 							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')">
-							<a class="nav-link" th:href="@{/user/miperfil}">Mi cuenta</a>
+							<a class="nav-link" th:href="@{/user/editarperfil}">Editar
+								Perfil</a>
 						</li>
-						<li class="nav-item" sec:authorize="!hasRole('ROLE_ADMIN')">
-							<a class="nav-link" th:href="@{/user/carrito}"><i
-								class="fa fa-shopping-cart" aria-hidden="true"></i> </a>
-						</li>
-							<li class="nav-item" sec:authorize="isAuthenticated()">
+						<!-- 						<li class="nav-item" sec:authorize="!hasRole('ROLE_ADMIN')"> -->
+						<!-- 							<a class="nav-link" th:href="@{/user/carrito}"><i -->
+						<!-- 								class="fa fa-shopping-cart" aria-hidden="true"></i> </a> -->
+						<!-- 						</li> -->
+						<li class="nav-item" sec:authorize="isAuthenticated()">
 							<!--  --> <a class="nav-link" th:href="@{/logout}">Cerrar
 								Sesi&oacuten</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/contactanos}">Contacto</a></li>
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							th:href="@{/nosotros}">Sobre nosotros</a></li>
 						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
 							class="nav-link" th:href="@{/registrarse}">Registrarse</a></li>
 					</ul>
@@ -112,7 +117,8 @@
 	<section class="container-fluid">
 		<div class="row mt-3 justify-content-around">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				<h3 class="text-center text-success text-md-start text-capitalize mt-2 mb-5">
+				<h3
+					class="text-center text-success text-md-start text-capitalize mt-2 mb-5">
 					Carrito <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
 				</h3>
 			</div>
@@ -121,8 +127,9 @@
 
 	<section>
 		<div class="container">
-			
-			<div class="row  text-success justify-content-around" th:if="${carrito == null}">
+
+			<div class="row  text-success justify-content-around"
+				th:if="${carrito == null}">
 				<div class="col-md-offset-1 col-md-10">
 					<div class="jumbotron">
 						<div class="container">
@@ -146,10 +153,25 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="x :${session.carrito}">
-								<td><img th:src="@{${x.imagen}}"></td>
-								<td th:text="@{${x.nombre}}"></td>
-								<td th:text="@{${#numbers.formatCurrency(x.precio)}}"></td>
+							<tr th:each="producto :${carrito}">
+								<td class="col-md-10">
+									<div class="media">
+										<img th:src="@{${producto.imagen}}">
+										<div class="media-body">
+											<h5 class="media-heading">
+												&nbsp; <span th:text="${producto.nombre}">Nombre del
+													producto</span>
+											</h5>
+										</div>
+									</div>
+								</td>
+								<td class="col-md-1"
+									th:text="@{${#numbers.formatCurrency(producto.precio)}}"></td>
+								<td class="col-md-1"><a
+									href="@{/user/eliminar/{id}(id=${producto.id}})">&nbsp;
+										Eliminar
+										<button type="button" class="close" data-dismiss="alert">x</button>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>
