@@ -44,7 +44,7 @@ public class AdminController {
 	@RequestMapping("insertarproducto")
 	public String insertarProducto(Model model) {
 		model.addAttribute("producto", new Productos());
-		return ("/admin/forminsertarproducto");
+		return ("admin/forminsertarproducto");
 	}
 
 	@RequestMapping(value = "/persistir", method = RequestMethod.POST)
