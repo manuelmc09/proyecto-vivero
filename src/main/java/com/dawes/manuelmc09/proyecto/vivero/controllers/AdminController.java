@@ -1,5 +1,7 @@
 package com.dawes.manuelmc09.proyecto.vivero.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,9 +56,9 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/persistirusuario", method = RequestMethod.POST)
 	public String persistirusuario(@ModelAttribute Usuario usuario) {
-//		usuario.setRol(rolService.getById(2));
+		usuario.setRol(rolService.getById(2));
 			//para Heroku
-		usuario.setRol(rolService.getById(11));
+//		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
 		return "redirect:/admin/verusuarios";
 	}
@@ -66,11 +68,11 @@ public class AdminController {
 		productosService.deleteById(idproducto);
 		return "redirect:/admin/verproductos";
 	}
-	@RequestMapping("/eliminarusuario")
-	public String eliminarusuario(@RequestParam int idusuario) {
-		usuarioService.deleteById(idusuario);
-		return "redirect:/admin/verusuario";
-	}
+//	@RequestMapping("/eliminarusuario")
+//	public String eliminarusuario(@RequestParam int idusuario) {
+//		usuarioService.deleteById(idusuario);
+//		return "redirect:/admin/verusuario";
+//	}
 	@RequestMapping("modificar")
 	public String modificar(@RequestParam int idproducto,Model model) {
 		model.addAttribute("producto", productosService.findById(idproducto));
@@ -86,7 +88,12 @@ public class AdminController {
 //	}
 	@RequestMapping("modificarusuario")
 	public String modificarUsuario(@RequestParam int idusuario,Model model) {
-		model.addAttribute("usuario",usuarioService.findById(idusuario));
+		model.addAttribute("usuario",usuarioService.findById(idusuario).get());
+//		model.addAttribute("roles",rolService.findAll());
+
+		// para Heroku no es necesario en esta vista
+//		usuario.setRol(rolService.getById(11));
+	
 		return "admin/modificarusuario";
 	}
 }
