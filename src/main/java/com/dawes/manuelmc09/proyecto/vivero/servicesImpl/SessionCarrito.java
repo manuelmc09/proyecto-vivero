@@ -53,6 +53,7 @@ public class SessionCarrito implements Serializable {
 			}else {
 				carrito.put(producto.get(), 1);
 			}
+			precioTotal();
 		}
 		
 	}

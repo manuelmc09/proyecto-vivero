@@ -70,6 +70,8 @@ public class UsuarioController {
 	public String addproductoCarrito(Model model,@RequestParam int idproducto) {
 		model.addAttribute("producto", productosService.findById(idproducto));
 		sessionCarrito.addCarrito(idproducto);
+		Float precioTotal=sessionCarrito.precioTotal();
+		model.addAttribute("precioTotal", precioTotal);
 		return "redirect:/carrito";
 	}
 
