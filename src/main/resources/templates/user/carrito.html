@@ -52,22 +52,6 @@
 				</span>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav mb-2 mb-lg-0 ml-sm-5">
-						<!-- 						<li class="nav-item" -->
-						<!-- 							sec:authorize="isAuthenticated() && !hasRole('ROLE_ADMIN')"> -->
-						<!-- 							<a class="nav-link" aria-current="page" th:href="@{/miperfil}">Mi -->
-						<!-- 								perfil</a> -->
-						<!-- 						</li> -->
-						<!-- 						<li class="nav-item dropdown"><a -->
-						<!-- 							class="nav-link dropdown-toggle dropdown-toggle-split" href="#" -->
-						<!-- 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" -->
-						<!-- 							aria-expanded="false"> Productos </a> -->
-						<!-- 							<ul class="dropdown-menu" -->
-						<!-- 								aria-labelledby="navbarDropdownMenuLink"> -->
-						<!-- 								<li><a class="dropdown-item" -->
-						<!-- 									th:href="@{/productos?categoria=informatica}">De Temporada</a></li> -->
-						<!-- 								<li><a class="dropdown-item" -->
-						<!-- 									th:href="@{/productos?categoria=salud}">En Maceta</a></li> -->
-						<!-- 							</ul></li> -->
 						<li class="nav-item" sec:authorize="!isAuthenticated()"><a
 							class="nav-link" th:href="@{/login}">Iniciar Sesi&oacuten</a></li>
 						<!-- 						<li class="nav-item" -->
@@ -153,15 +137,19 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="producto :${carrito}">
+							<tr th:each="productocarrito :${productoscarrito.entrySet()}">
 								<td class="col-md-10">
 									<div class="media">
-										<img th:src="@{${producto.imagen}}">
+										<img th:src="${productocarrito.getKey().imagen}"
+											alt="Imagen no disponible">
 										<div class="media-body">
 											<h5 class="media-heading">
-												&nbsp; <span th:text="${producto.nombre}">Nombre del
-													producto</span>
+												&nbsp; <span th:text="${productocarrito.getKey().nombre}">Nombre
+													del producto</span>
 											</h5>
+										</div>
+										<div class="text-center">
+											<h5 th:text="${productocarrito.getKey().precio}+'€'"></h5>
 										</div>
 									</div>
 								</td>

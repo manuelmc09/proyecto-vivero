@@ -1,8 +1,8 @@
 package com.dawes.manuelmc09.proyecto.vivero.controllers;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +10,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dawes.manuelmc09.proyecto.vivero.dto.PedidosDTO;
-import com.dawes.manuelmc09.proyecto.vivero.entities.Pedidos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
-import com.dawes.manuelmc09.proyecto.vivero.mapper.PedidosMapper;
 import com.dawes.manuelmc09.proyecto.vivero.services.PedidosService;
 import com.dawes.manuelmc09.proyecto.vivero.services.ProductosService;
 import com.dawes.manuelmc09.proyecto.vivero.services.RolService;
 import com.dawes.manuelmc09.proyecto.vivero.services.SecurityService;
 import com.dawes.manuelmc09.proyecto.vivero.services.UsuarioService;
+import com.dawes.manuelmc09.proyecto.vivero.servicesImpl.SessionCarrito;
 
 /**
  * 
@@ -35,6 +32,9 @@ import com.dawes.manuelmc09.proyecto.vivero.services.UsuarioService;
 @Controller
 @RequestMapping("/user")
 public class UsuarioController {
+	
+	@Resource(name="sessionCarrito")
+	SessionCarrito sessionCarrito;
 
 	@Autowired
 	UsuarioService usuarioService;
@@ -59,22 +59,22 @@ public class UsuarioController {
 
 	@RequestMapping("/carrito")
 	public String verCarrito(Model model) {
-
+		Map<Productos,Integer>productosCarrito=sessionCarrito.getCarrito();
+		model.addAttribute("productoscarrito",productosCarrito);
+		Float precioTotal=sessionCarrito.precioTotal();
 		return "user/carrito";
 
 	}
 
-	@RequestMapping("/addproductocarrito/{id}")
-	public String addproductoCarrito(Model model, Authentication authentication) {
-//		List<Integer> contenido = (List<Integer>) session.getAttribute("carrito");
-//
-//		return (contenido == null) ? null : productosService.variosPorId(contenido);
-		return "carrito";
+	@RequestMapping("aniadirproductocarrito")
+	public String addproductoCarrito(Model model,@RequestParam int idproducto) {
+		model.addAttribute("producto", productosService.findById(idproducto));
+		sessionCarrito.addCarrito(idproducto);
+		return "redirect:/carrito";
 	}
 
 	@RequestMapping("/confirmarCompra")
-	public String confirmarCompra(Model model, Authentication Authentication, HttpSession session) {
-		model.getAttribute("carrito");
+	public String confirmarCompra(Model model) {
 		return "user/confirmacionCompra";
 	}
 

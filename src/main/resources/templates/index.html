@@ -272,10 +272,13 @@
 								<td th:text="'STOCK: '+ ${producto.stock}"></td>
 								<td><a class="btn btn-success mt-4"
 									th:if="${producto.stock} !=0"
-									th:href="'/aniadirproductocarrito/' + ${producto.idproducto}"
-									sec:authorize="isAuthenticated()">COMPRAR</a> <a
+									th:href="@{user/aniadirproductocarrito(idproducto=${producto.idproducto})}"
+									sec:authorize="isAuthenticated()">AÑADIR AL CARRITO</a> <a
 									class="text-danger" th:if="${producto.stock} ==0"
 									sec:authorize="isAuthenticated()">AGOTADO TEMPORALMENTE</a></td>
+									<!--th:href="'/aniadirproductocarrito/' + ${producto.idproducto}" COMPRAR-->
+									<!--th:href="@{/user/carrito(idproducto=${producto.idproducto}))"  -->
+									
 							</tr>
 						</tbody>
 					</table>
