@@ -64,16 +64,17 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping("/carrito/add{id}")
-	public List<Productos> addCarrito(Model model, @PathVariable Integer id) {
-		List<Integer> contenido = (List<Integer>) session.getAttribute("carrito");
-
-		return (contenido == null) ? null : productosService.variosPorId(contenido);
-
+	@RequestMapping("/addproductocarrito/{id}")
+	public String addproductoCarrito(Model model, Authentication authentication) {
+//		List<Integer> contenido = (List<Integer>) session.getAttribute("carrito");
+//
+//		return (contenido == null) ? null : productosService.variosPorId(contenido);
+		return "carrito";
 	}
 
 	@RequestMapping("/confirmarCompra")
-	public String confirmarCompra(Model model, Authentication Authentication, HttpSession sesion) {
+	public String confirmarCompra(Model model, Authentication Authentication, HttpSession session) {
+		model.getAttribute("carrito");
 		return "user/confirmacionCompra";
 	}
 
@@ -115,9 +116,9 @@ public class UsuarioController {
 //		usuario.setRol(rolService.getById(2));
 
 //		user.setRol(rolService.getById(11));
-		usuario.setRol(rolService.getById(11));
-		// para Heroku
 //		usuario.setRol(rolService.getById(11));
+		// para Heroku
+		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
 		return "redirect:/user/miperfil";
 

@@ -47,18 +47,26 @@ public class DBInitializer {
 		Productos delariega = new Productos(
 				"Fruto de tamaño mediano o algo pequeño de forma cónica oblonga a cónica globulosa y epidermis amarilla manchada de marrón anaranjado y estrías rosadas . Variedad semiácida.",
 				"DE TEMPORADA", "delariega.png", "De la Riega", 8.95f, 120);
-//        Productos durona = new Productos("Fruto de tamaño mediano de forma globulosa a algo troncocónica, color amarillo verdoso con manchas naranja o marrón en una superficie habitualmente inferior a su cuarta parte. Variedad ácida.","DE TEMPORADA", "duronadetresali.png", "Durona de Tresali", 8.95f, 120);
-//
+		Productos durona = new Productos(
+				"Fruto de tamaño mediano de forma globulosa a algo troncocónica, color amarillo verdoso con manchas naranja o marrón en una superficie habitualmente inferior a su cuarta parte. Variedad ácida.",
+				"DE TEMPORADA", "duronadetresali.png", "Durona de Tresali", 8.95f, 120);
+		Productos amariega = new Productos(
+				"Grupo tecnológico: Amargo\r\n" + "Vigor: Elevado\r\n" + "Sensibilidad a hongos: Baja – muy baja\r\n"
+						+ "Floración: Tardía\r\n" + "Maduración: 3ª decena de octubre\r\n"
+						+ "Producción: Rápida entrada en producción",
+				"DE TEMPORADA", "amariega2.png", "Amariega", 8.95f, 230);
 		List<Productos> losProductos = new ArrayList<>();
 		productosRepository.save(raxao);
 		productosRepository.save(regona);
 		productosRepository.save(delariega);
-//        productosRepository.save(durona);
-		for (Productos p : losProductos) {
-			productosRepository.save(p);
-			logger.info("Producto insertado correctamente");
-		}
-//        
+		productosRepository.save(durona);
+		productosRepository.save(amariega);
+
+//		for (Productos p : losProductos) {
+//			productosRepository.save(p);
+//			logger.info("Producto insertado correctamente");
+//		}
+
 		// Roles
 		logger.info("Create Roles objects ...");
 		Rol admin = new Rol("ROLE_ADMIN");
