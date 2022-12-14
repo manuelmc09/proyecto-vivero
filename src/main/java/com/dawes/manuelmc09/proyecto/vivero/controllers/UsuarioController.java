@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawes.manuelmc09.proyecto.vivero.config.RequestBean;
-import com.dawes.manuelmc09.proyecto.vivero.config.ScopesConfig;
+import com.dawes.manuelmc09.proyecto.vivero.config.SessionScopeBean;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 import com.dawes.manuelmc09.proyecto.vivero.services.PedidosService;
@@ -40,8 +40,8 @@ public class UsuarioController {
 	SessionCarrito sessionCarrito;
 
 	@Autowired
-	ScopesConfig scopesConfig;
-	
+	SessionScopeBean scopesConfig;
+
 	@Autowired
 	RequestBean requestBean;
 
@@ -64,11 +64,11 @@ public class UsuarioController {
 	HttpSession session;
 
 	@RequestMapping("/carrito")
-	public String verCarrito(Model model,HttpServletRequest request) {
-		Map<Productos, Integer> productosCarrito = sessionCarrito.getCarrito();
-		HttpSession session=request.getSession();
+	public String verCarrito(Model model, HttpServletRequest request) {
+		Map<Productos, Integer> productosCarrito = sessionCarrito.getCarrito(); // scopesConfig.sessionCarrito.getCarrito();
+		HttpSession session = request.getSession();
 		model.addAttribute("productoscarrito", productosCarrito);
-		Float precioTotal = sessionCarrito.precioTotal();
+		Float precioTotal = sessionCarrito.precioTotal(); 						// scopesConfig.sessionCarrito.precioTotal();
 		model.addAttribute("precioTotal", precioTotal);
 		return "user/carrito";
 
@@ -77,20 +77,21 @@ public class UsuarioController {
 	@RequestMapping("aniadirproductocarrito")
 	public String addproductoCarrito(Model model, @RequestParam int idproducto) {
 		model.addAttribute("producto", productosService.findById(idproducto));
-		sessionCarrito.addCarrito(idproducto);
-		Float precioTotal = sessionCarrito.precioTotal();
+		sessionCarrito.addCarrito(idproducto);						//scopesConfig.sessionCarrito.addCarrito(idproducto);
+		Float precioTotal = sessionCarrito.precioTotal();			//scopesConfig.sessionCarrito.precioTotal();
 		model.addAttribute("precioTotal", precioTotal);
 		return "redirect:/user/carrito";
 	}
 
 	@RequestMapping("/confirmarCompra")
 	public String confirmarCompra(Model model) {
+
 		return "user/confirmacionCompra";
 	}
 
 	@RequestMapping("/eliminarproductocarrito")
 	public String eliminarproductoCarrito(@RequestParam int idproducto) {
-		sessionCarrito.removeItemCarrito(idproducto);
+		scopesConfig.sessionCarrito.removeItemCarrito(idproducto);
 		return "redirect:/user/carrito";
 	}
 
@@ -129,9 +130,9 @@ public class UsuarioController {
 		user.setUsername(usuario.getUsername());
 		user.setPassword(usuario.getPassword());
 
-		usuario.setRol(rolService.getById(2));
+//		usuario.setRol(rolService.getById(2));
 
-		user.setRol(rolService.getById(11));
+//		user.setRol(rolService.getById(11));
 
 		// para Heroku
 		usuario.setRol(rolService.getById(11));

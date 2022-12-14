@@ -132,13 +132,14 @@
 								<th scope="col" class="h5 text-success  m-2">Nombre
 									Producto</th>
 								<th scope="col" class="h5 text-success m-2">Precio</th>
+								<th scope="col" class="h5 text-success m-2">Unidades</th>
 								<th scope="col" colspan="2" class="h5 text-success m-2"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="productocarrito :${productoscarrito.entrySet()}">
 								<td class="col-md-10">
-									<div class="media">
+									<div class="thumbnail pull-left media-object">
 										<img th:src="${productocarrito.getKey().imagen}"
 											alt="Imagen no disponible">
 									</div>
@@ -156,7 +157,12 @@
 										<h5 th:text="${productocarrito.getKey().precio}+'€'"></h5>
 									</div>
 								</td>
-							
+								<td class="col-md-10">
+									<div class="text-center">
+										<h5 th:text="${productocarrito.getValue()}+' uds'"></h5>
+									</div>
+								</td>
+
 								<td><a class="text-center btn btn-secondary"
 									th:href="@{eliminarproductocarrito(idproducto=${productocarrito.getKey().idproducto})}">&nbsp;
 										Eliminar del carrito</a></td>

@@ -14,11 +14,12 @@ import com.dawes.manuelmc09.proyecto.vivero.servicesImpl.SessionCarrito;
  *
  */
 @Configuration
-public class ScopesConfig {
+public class SessionScopeBean {
+	public SessionCarrito sessionCarrito;
 
 	@Bean
 	@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-	public SessionCarrito carritoScopedBean() {
+	public SessionCarrito SessionScopeBean() {
 		return new SessionCarrito();
 	}
 
