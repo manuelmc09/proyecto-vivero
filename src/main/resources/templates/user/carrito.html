@@ -98,42 +98,41 @@
 			<div id="cerrarSesion" sec:authorize="isAuthenticated()"></div>
 	</header>
 
-	<section class="container-fluid">
-		<div class="row mt-3 justify-content-around">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				<h3
-					class="text-center text-success text-md-start text-capitalize mt-2 mb-5">
-					Carrito <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-				</h3>
-			</div>
-		</div>
-	</section>
+
 
 	<section>
 		<div class="container">
 
-			<div class="row  text-success justify-content-around"
-				th:if="${carrito == null}">
+			<div class="row  text-success justify-content-around">
 				<div class="col-md-offset-1 col-md-10">
 					<div class="jumbotron">
 						<div class="container">
-							<h5 class="text-center">Aún no ha seleccionado ningún
-								producto para comprar</h5>
+							<h5 class="text-center">
+								Carrito <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
+							</h5>
 						</div>
 					</div>
+					<!-- th:if="${carrito == null}" -->
 				</div>
+				<section class="container-fluid">
+					<div class="row mt-3 justify-content-around">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+							<h5
+								class="text-center text-success text-md-start text-capitalize mt-2 mb-5">
+								Tu compra</h5>
+						</div>
+					</div>
+				</section>
 				<div class="row">
-					<table
-						class="table table-bordered table-success table-striped text-center mt-5">
+					<table class="table table-light table-striped text-center mt-5">
 						<thead>
 							<tr>
 								<!-- Lista como en el index -->
-								<th scope="col" colspan="3" class="h5 text-success  m-2">Nombre
-									Producto</th>
 								<th scope="col" class="h5 text-success m-2">Imagen</th>
+								<th scope="col" class="h5 text-success  m-2">Nombre
+									Producto</th>
 								<th scope="col" class="h5 text-success m-2">Precio</th>
-								<th scope="col" class="h5 text-success m-2"></th>
-								<th scope="col" class="h5 text-success m-2"></th>
+								<th scope="col" colspan="2" class="h5 text-success m-2"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -142,24 +141,34 @@
 									<div class="media">
 										<img th:src="${productocarrito.getKey().imagen}"
 											alt="Imagen no disponible">
-										<div class="media-body">
-											<h5 class="media-heading">
-												&nbsp; <span th:text="${productocarrito.getKey().nombre}">Nombre
-													del producto</span>
-											</h5>
-										</div>
-										<div class="text-center">
-											<h5 th:text="${productocarrito.getKey().precio}+'€'"></h5>
-										</div>
+
+
 									</div>
 								</td>
-								<td class="col-md-1"
-									th:text="${#numbers.formatCurrency(producto.precio)}"></td>
-								<td class="col-md-1"><a
-									href="@{/user/eliminar/{id}(id=${producto.id}})">&nbsp;
-										Eliminar
-										<button type="button" class="close" data-dismiss="alert">x</button>
+								<td class="col-md-10">
+									<div class="media-body">
+										<h5 class="media-heading">
+											&nbsp; <span th:text="${productocarrito.getKey().nombre}">Nombre
+												del producto</span>
+										</h5>
+									</div>
+								</td>
+								<td class="col-md-10">
+									<div class="text-center">
+										<h5 th:text="${productocarrito.getKey().precio}+'€'"></h5>
+									</div>
+								</td>
+								<!-- 								<td class="col-md-1" -->
+								<!-- 									th:text="${#numbers.formatCurrency(producto.precio)}"></td> -->
+								<!-- 								<td class="col-md-1"> -->
+								<td><a href="@{/user/eliminar/{id}(id=${producto.id}})"
+									class="text-center btn btn-secondary">&nbsp; Cancelar
+										compra <!-- 										<button type="button" class="close" data-dismiss="alert">x</button> -->
 								</a></td>
+							</tr>
+							<tr>
+								<td class="col-md-10" colspan="3"
+									th:text="'PRECIO TOTAL A PAGAR: '+${precioTotal}+ ' €'"></td>
 							</tr>
 						</tbody>
 					</table>

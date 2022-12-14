@@ -75,20 +75,6 @@ public class DBInitializer {
 		rolRepository.save(admin);
 		rolRepository.save(user);
 
-//        
-//        //	Usuarios
-//        logger.info("Create Usuarios objects....");
-//        Usuario manuel=new Usuario("manuel","manuelmc09@gmail.com","manuel","VICtor1975",user);
-//        Usuario maria=new Usuario("maria","maria@gmail.com","maria","maria",user);
-//        Usuario test=new Usuario("test","test@liferay.com","test","test",admin);
-//        List<Usuario>losUsuarios=new ArrayList<>();
-//        for(Usuario u:losUsuarios) {
-//        	usuarioRepository.save(u);
-//        	logger.info("Usuario insertado correctamente");
-//        }
-//       
-//
-//        
-//        
+       
 	}
 }

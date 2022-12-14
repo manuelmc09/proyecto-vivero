@@ -72,7 +72,7 @@ public class UsuarioController {
 		sessionCarrito.addCarrito(idproducto);
 		Float precioTotal=sessionCarrito.precioTotal();
 		model.addAttribute("precioTotal", precioTotal);
-		return "redirect:/carrito";
+		return "redirect:/user/carrito";
 	}
 
 	@RequestMapping("/confirmarCompra")
@@ -118,7 +118,6 @@ public class UsuarioController {
 //		usuario.setRol(rolService.getById(2));
 
 //		user.setRol(rolService.getById(11));
-//		usuario.setRol(rolService.getById(11));
 		// para Heroku
 		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);
