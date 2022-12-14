@@ -263,7 +263,7 @@
 
 						</thead>
 						<tbody>
-							<tr th:each="producto: ${productos}">
+							<tr th:each="producto: ${productos}" th:object="${mysession}">
 								<td><img th:src="@{${'/images/'+producto.imagen}}"
 									alt="Imagen no disponible"></td>
 								<td th:text="${producto.nombre}"></td>

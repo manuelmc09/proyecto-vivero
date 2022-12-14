@@ -3,6 +3,7 @@ package com.dawes.manuelmc09.proyecto.vivero.controllers;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dawes.manuelmc09.proyecto.vivero.config.RequestBean;
+import com.dawes.manuelmc09.proyecto.vivero.config.ScopesConfig;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Productos;
 import com.dawes.manuelmc09.proyecto.vivero.entities.Usuario;
 import com.dawes.manuelmc09.proyecto.vivero.services.PedidosService;
@@ -32,15 +35,18 @@ import com.dawes.manuelmc09.proyecto.vivero.servicesImpl.SessionCarrito;
 @Controller
 @RequestMapping("/user")
 public class UsuarioController {
-	
-	@Resource(name="sessionCarrito")
+
+	@Resource(name = "sessionCarrito")
 	SessionCarrito sessionCarrito;
 
 	@Autowired
-	UsuarioService usuarioService;
+	ScopesConfig scopesConfig;
+	
+	@Autowired
+	RequestBean requestBean;
 
-//	@Autowired
-//	PedidosMapper pedidosMapper;
+	@Autowired
+	UsuarioService usuarioService;
 
 	@Autowired
 	PedidosService pedidosService;
@@ -58,19 +64,21 @@ public class UsuarioController {
 	HttpSession session;
 
 	@RequestMapping("/carrito")
-	public String verCarrito(Model model) {
-		Map<Productos,Integer>productosCarrito=sessionCarrito.getCarrito();
-		model.addAttribute("productoscarrito",productosCarrito);
-		Float precioTotal=sessionCarrito.precioTotal();
+	public String verCarrito(Model model,HttpServletRequest request) {
+		Map<Productos, Integer> productosCarrito = sessionCarrito.getCarrito();
+		HttpSession session=request.getSession();
+		model.addAttribute("productoscarrito", productosCarrito);
+		Float precioTotal = sessionCarrito.precioTotal();
+		model.addAttribute("precioTotal", precioTotal);
 		return "user/carrito";
 
 	}
 
 	@RequestMapping("aniadirproductocarrito")
-	public String addproductoCarrito(Model model,@RequestParam int idproducto) {
+	public String addproductoCarrito(Model model, @RequestParam int idproducto) {
 		model.addAttribute("producto", productosService.findById(idproducto));
 		sessionCarrito.addCarrito(idproducto);
-		Float precioTotal=sessionCarrito.precioTotal();
+		Float precioTotal = sessionCarrito.precioTotal();
 		model.addAttribute("precioTotal", precioTotal);
 		return "redirect:/user/carrito";
 	}
@@ -78,6 +86,12 @@ public class UsuarioController {
 	@RequestMapping("/confirmarCompra")
 	public String confirmarCompra(Model model) {
 		return "user/confirmacionCompra";
+	}
+
+	@RequestMapping("/eliminarproductocarrito")
+	public String eliminarproductoCarrito(@RequestParam int idproducto) {
+		sessionCarrito.removeItemCarrito(idproducto);
+		return "redirect:/user/carrito";
 	}
 
 	@RequestMapping("/miperfil")
@@ -115,9 +129,10 @@ public class UsuarioController {
 		user.setUsername(usuario.getUsername());
 		user.setPassword(usuario.getPassword());
 
-//		usuario.setRol(rolService.getById(2));
+		usuario.setRol(rolService.getById(2));
 
-//		user.setRol(rolService.getById(11));
+		user.setRol(rolService.getById(11));
+
 		// para Heroku
 		usuario.setRol(rolService.getById(11));
 		usuarioService.save(usuario);

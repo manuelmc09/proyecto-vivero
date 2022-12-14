@@ -31,7 +31,7 @@ import com.dawes.manuelmc09.proyecto.vivero.repositories.ProductosRepository;
  */
 @Service
 public class SessionCarrito implements Serializable {
-	
+
 	@Autowired
 	private ProductosRepository productosRepository;
 
@@ -44,24 +44,38 @@ public class SessionCarrito implements Serializable {
 	public Map<Productos, Integer> getCarrito() {
 		return carrito;
 	}
-	
+
 	public void addCarrito(int idproducto) {
-		Optional<Productos> producto=productosRepository.findById(idproducto);
-		if(producto.isPresent()) {
-			if(carrito.containsKey(producto.get())) {
-				carrito.replace(producto.get(), carrito.get(producto.get())+1);
-			}else {
+		Optional<Productos> producto = productosRepository.findById(idproducto);
+		if (producto.isPresent()) {
+			if (carrito.containsKey(producto.get())) {
+				carrito.replace(producto.get(), carrito.get(producto.get()) + 1);
+			} else {
 				carrito.put(producto.get(), 1);
 			}
 			precioTotal();
 		}
-		
+
 	}
-	
+
+	public void removeItemCarrito(int idproducto) {
+		Optional<Productos> producto = productosRepository.findById(idproducto);
+		if (producto.isPresent()) {
+			if (carrito.get(producto.get()) > 1) {
+				carrito.replace(producto.get(), carrito.get(producto.get()) - 1);
+			} else if (carrito.get(producto.get()) == 1) {
+				carrito.remove(producto.get());
+			}else {
+				logger.info("error");
+			}
+			precioTotal();
+		}
+	}
+
 	public Float precioTotal() {
-		float precio=0;
-		for(Entry<Productos, Integer> producto : carrito.entrySet()) {
-			precio += producto.getKey().getPrecio()*producto.getValue();
+		float precio = 0;
+		for (Entry<Productos, Integer> producto : carrito.entrySet()) {
+			precio += producto.getKey().getPrecio() * producto.getValue();
 		}
 		return precio;
 	}
